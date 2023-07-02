@@ -4,15 +4,19 @@ import socketioLogo from './assets/socketio.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { socket } from './socket';
+import Message from './Message'
 
 function App() {
-  const [formMessage, setFormMessage] = useState('')
+  const [nickname, setNickname] = useState()
+  const [nicknameInput, setNicknameInput] = useState()
+  const [chatMessage, setChatMessage] = useState('')
   const [messages, setMessages] = useState([])
   const [isConnected, setIsConnected] = useState(socket.connected);
 
   useEffect(() => {
     const onConnect = () => {
       setIsConnected(true)
+      setNickname(socket.id)
     }
 
     const onDisconnect = () => {
@@ -23,28 +27,46 @@ function App() {
       setMessages(messages => [message, ...messages])
     }
 
+    const onMessageMemory = (oldMessagesData) => {
+      setMessages(messages => [...messages, ...oldMessagesData.slice().reverse()])
+    }
+
     socket.on('connect', onConnect)
     socket.on('disconnect', onDisconnect)
     socket.on('chat message', onChatMessage)
+    socket.on('message memory', onMessageMemory)
 
     socket.connect()
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
-      socket.off('chat message')
+      socket.off('chat message', onChatMessage)
+      socket.off('message memory', onMessageMemory)
     }
   }, [])
 
-  const handleInputChange = (event) => {
-    setFormMessage(event.target.value);
+  const handleChatInputChange = (event) => {
+    setChatMessage(event.target.value);
   }
 
 
-  const handleFormSubmit = (event) => {
-    socket.emit('chat message', formMessage);
-    setFormMessage('')
-    event.preventDefault();
+  const handleChatSubmit = (event) => {
+    socket.emit('chat message', chatMessage);
+    setChatMessage('')
+    event.preventDefault()
+  }
+
+  const handleNicknameInputChange = (event) => {
+    setNicknameInput(event.target.value);
+  }
+
+
+  const handleNicknameSubmit = (event) => {
+    socket.emit('nickname update', nicknameInput);
+    setNickname(nicknameInput)
+    setNicknameInput('')
+    event.preventDefault()
   }
 
   return (
@@ -63,19 +85,29 @@ function App() {
       <h1>Vite + React + Socket.io</h1>
       { isConnected &&
         <>
-          <form id="form" action="" onSubmit={handleFormSubmit}>
+          <form id="nicknameForm" action="" onSubmit={handleNicknameSubmit}>
+            <input
+              id="nickname-input"
+              autoComplete="off"
+              placeholder={nickname}
+              value={nicknameInput}
+              onChange={handleNicknameInputChange}
+            />
+            <button disabled={nicknameInput?.length === 0 || nicknameInput === nickname}>Update Name</button>
+          </form>
+          <form id="chatForm" action="" onSubmit={handleChatSubmit}>
             <input
               id="chat-input"
               autoComplete="off"
-              placeholder='Chat.'
-              value={formMessage}
-              onChange={handleInputChange}
+              placeholder={`Chat as ${nickname}`}
+              value={chatMessage}
+              onChange={handleChatInputChange}
             />
-            <button disabled={formMessage.length === 0}>Send</button>
+            <button disabled={chatMessage?.length === 0}>Send</button>
           </form>
           <ul id="messages">
             {
-              messages.map((message, i) => <li key={i}>{message}</li>)
+              messages.map((messageData, i) => <Message key={i} messageData={messageData} />)
             }
           </ul>
         </>

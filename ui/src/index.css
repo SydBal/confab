@@ -25,7 +25,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  /* display: flex; */
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -66,4 +66,33 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+input {
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+#chat-input {
+  margin-right: 6px
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  margin: 0 auto 10px;
+  max-width:400px;
+  list-style: none;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
 }

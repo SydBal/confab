@@ -11,19 +11,21 @@ function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
 
   useEffect(() => {
-    function onConnect() {
-      setIsConnected(true);
+    const onConnect = () => {
+      setIsConnected(true)
     }
 
-    function onDisconnect() {
-      setIsConnected(false);
+    const onDisconnect = () => {
+      setIsConnected(false)
     }
 
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-    socket.on('chat message', (message) => {
+    const onChatMessage = (message) => {
       setMessages(messages => [message, ...messages])
-    })
+    }
+
+    socket.on('connect', onConnect)
+    socket.on('disconnect', onDisconnect)
+    socket.on('chat message', onChatMessage)
 
     socket.connect()
 
@@ -63,12 +65,13 @@ function App() {
         <>
           <form id="form" action="" onSubmit={handleFormSubmit}>
             <input
-              id="input"
+              id="chat-input"
               autoComplete="off"
+              placeholder='Chat.'
               value={formMessage}
               onChange={handleInputChange}
             />
-            <button>Send</button>
+            <button disabled={formMessage.length === 0}>Send</button>
           </form>
           <ul id="messages">
             {

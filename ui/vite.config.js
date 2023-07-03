@@ -9,13 +9,19 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 export default defineConfig({
   plugins: [react()],
   mode: isDev ? 'development' : 'production',
-  root: __dirname,
+  root: `${__dirname}/src`,
   server: {
     port: uiPort,
     open: true,
+    host: true,
   },
   preview: {
     port: uiPort,
     open: false,
+    host: true,
   },
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+  }
 })

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import socketioLogo from './assets/socketio.svg'
+import reactLogo from '../assets/react.svg'
+import socketioLogo from '../assets/socketio.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { socket } from './socket';
+import { socket } from '../socket';
 import Message from './Message'
 
 function App() {
@@ -71,7 +71,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className='hero-images'>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

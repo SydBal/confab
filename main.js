@@ -1,4 +1,4 @@
-import { initViteServer } from './ui/index.js';
+import { initViteServer } from './ui/vite.js';
 import { initSocketServer } from './sockets/index.js';
 
 const main = async () => {

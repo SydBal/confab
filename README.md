@@ -6,6 +6,7 @@
 
 ### Development server
 Includes HMR, React Dev build
+
 ```yarn dev```
 
 Webpage hosted at https://localhost:1337/
@@ -14,7 +15,12 @@ Socket server hosted at https://localhost:1338/
 
 ### Production server
 Not including HMR, React Prod build
+
 ```yarn start```
+
+Webpage hosted at https://localhost:1337/
+
+Socket server hosted at https://localhost:1338/
 
 ### Docker
 Build image

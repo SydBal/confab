@@ -5,7 +5,7 @@
 ```yarn```
 
 ### Development server
-Powered by [Vite](https://vitejs.dev/), including HMR
+Includes HMR, React Dev build
 ```yarn dev```
 
 Webpage hosted at https://localhost:1337/
@@ -13,7 +13,7 @@ Webpage hosted at https://localhost:1337/
 Socket server hosted at https://localhost:1338/
 
 ### Production server
-Not including HMR
+Not including HMR, React Prod build
 ```yarn start```
 
 ### Docker

@@ -1,13 +1,18 @@
 # confab
 
 ## Setup
+### Minimum Prerequirements
+- Nodejs v16+
+
+Instructions assume usage of yarn over npm
+
 ### Install dependancies
-```yarn```
+`yarn`
 
 ### Development server
 Includes HMR, React Dev build
 
-```yarn dev```
+`yarn dev`
 
 Webpage hosted at https://localhost:1337/
 
@@ -16,7 +21,7 @@ Socket server hosted at https://localhost:1338/
 ### Production server
 Not including HMR, React Prod build
 
-```yarn start```
+`yarn start`
 
 Webpage hosted at https://localhost:1337/
 

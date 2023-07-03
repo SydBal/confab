@@ -1,8 +1,16 @@
 import { io } from 'socket.io-client';
 
-// "undefined" means the URL will be computed from the `window.location` object
-const URL = process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:1338';
+/**
+ * Get base URL and strip port if exists before generating socketio url
+ */
+let uiOriginURL = new URL(window.location.origin);
+let urlWithoutPort
+if (uiOriginURL.port) {
+  urlWithoutPort = uiOriginURL.origin.split(':').slice(0, -1).join(':')
+}
 
-export const socket = io(URL, {
+const socketURL = `${urlWithoutPort || window.location.origin}:${import.meta.env.VITE_SOCKET_PORT}`;
+
+export const socket = io(socketURL, {
   autoConnect: false
 });

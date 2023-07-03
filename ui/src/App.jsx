@@ -7,8 +7,8 @@ import { socket } from './socket';
 import Message from './Message'
 
 function App() {
-  const [nickname, setNickname] = useState()
-  const [nicknameInput, setNicknameInput] = useState()
+  const [nickname, setNickname] = useState('')
+  const [nicknameInput, setNicknameInput] = useState('')
   const [chatMessage, setChatMessage] = useState('')
   const [messages, setMessages] = useState([])
   const [isConnected, setIsConnected] = useState(socket.connected);

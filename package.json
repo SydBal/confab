@@ -6,10 +6,8 @@
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "dev": "node main.js --dev",
+    "lint": "eslint ui/src --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -1,16 +1,12 @@
 import { Server as SocketServer } from 'socket.io'
-import { socketPort, uiPort } from '../utils/argv.js'
+import { socketPort } from '../utils/argv.js'
 
 /**
  * initSocketServer
  * Handles running the socket server used to communicate in real time with frontend
  */
-export const initSocketServer = async () => {
-  const socketServer = new SocketServer(socketPort, {
-    cors: {
-      origin: `http://localhost:${uiPort}`
-    }
-  });
+export const initSocketServer = async (viteServer) => {
+  const socketServer = new SocketServer(viteServer);
 
   /**
    * ChatMemory

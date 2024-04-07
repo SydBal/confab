@@ -35,7 +35,7 @@ process.env.VITE_UI_PORT = uiPort
 
 // socketPort for socketio server
 const socketPortArg = parseInt(argv('socket-port'))
-export const socketPort = socketPortArg || uiPort + 1
+export const socketPort = socketPortArg || uiPort
 process.env.VITE_SOCKET_PORT = socketPort
 
 // isDev for dev server

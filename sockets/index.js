@@ -9,22 +9,6 @@ export const initSocketServer = async (viteServer) => {
   const socketServer = new SocketServer(viteServer);
 
   /**
-   * Google Cloud Run uses this for scaling
-   */
-  const {createAdapter} = require('@socket.io/redis-adapter');
-  // Replace in-memory adapter with Redis
-  const subClient = redisClient.duplicate();
-  io.adapter(createAdapter(redisClient, subClient));
-  // Add error handlers
-  redisClient.on('error', err => {
-    console.error(err.message);
-  });
-
-  subClient.on('error', err => {
-    console.error(err.message);
-  });
-
-  /**
    * ChatMemory
    */
   const recentMessages = []
@@ -74,16 +58,6 @@ export const initSocketServer = async (viteServer) => {
       console.log(`nickname updated, ${oldNickname} changed to ${socket.data.nickname}`);
     });
   });
-
-  // Add listener for "updateSocketId" event
-  // socket.on('updateSocketId', async ({user, room}) => {
-  //   try {
-  //     addUser(socket.id, user, room);
-  //     socket.join(room);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // });
 
   console.log(`Socket.io Server Initialized on port ${socketPort}`)
   return socketServer

@@ -12,5 +12,6 @@ if (uiOriginURL.port) {
 const socketURL = `${urlWithoutPort || window.location.origin}:${import.meta.env.VITE_SOCKET_PORT}`;
 
 export const socket = io(socketURL, {
+  transports: ['websocket'],
   autoConnect: false
 });

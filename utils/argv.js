@@ -30,7 +30,7 @@ const argv = key => {
 
 // uiPort for vite server
 const uiPortArg = parseInt(argv('ui-port'))
-export const uiPort = uiPortArg || 1337
+export const uiPort = process.env.PORT || uiPortArg || 1337
 process.env.VITE_UI_PORT = uiPort
 
 // socketPort for socketio server
